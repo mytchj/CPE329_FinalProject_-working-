@@ -17,11 +17,11 @@
 #define G_ENABLE 1
 #define B_ENABLE 1
 
-uint_8 bottomLED = -1;
-uint_8 currentLED = -1;
+uint8_t bottomLED = -1;
+uint8_t currentLED = -1;
 
-static uint_8 numColorChannels = R_ENABLE + G_ENABLE + B_ENABLE;
-static uint_8 numLeds = NUM_LED_CHANNELS / numColorChannels;
+static uint8_t numColorChannels = R_ENABLE + G_ENABLE + B_ENABLE;
+static uint8_t numLeds = NUM_LED_CHANNELS / numColorChannels;
 
 color ambientColor = {0,0,0};
 color rearLight = {TOP_GS, 0, 0};
@@ -38,7 +38,7 @@ void setAllLEDs(int r, int g, int b) {
 
 void setAllLEDs(color solid) {
    int ndx;
-   Serial.println(r);   // print GS data to Serial window (BAUD =9600)
+   Serial.println(solid.r);   // print GS data to Serial window (BAUD =9600)
    Tlc.clear();      // clear TLC data
    //   Tlc.setAll(r);     // set all TLC channel (15:0) to GS value
    
@@ -72,7 +72,7 @@ void nextLED() {
       if (ndx == currentLED)
          setLED(ndx, rearLight);
       else
-         setLED(ndx, ambientColor.);
+         setLED(ndx, ambientColor);
    }
    
    Tlc.update();
