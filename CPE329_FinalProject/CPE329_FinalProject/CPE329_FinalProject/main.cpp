@@ -9,8 +9,13 @@ int main(void){
 	_delay_ms(100);			// startup delay
 	
 	init();					// initializations for Arduino.h
-	Serial.begin(9600);		// set baud rate for serial com
+	//Serial.begin(9600);		// set baud rate for serial com
 	Tlc.init();				// initialize the TLC chip
+	
+	initGPIO();
+	//initTimers();
+	//initPCINT();
+	//sei();
    
 	// Turn on full, then fade off
 	while(GS >= 0){
@@ -29,7 +34,8 @@ int main(void){
 		nextLED();
 		setAmbientColor(GS, 0, 0);
 		GS++;
-		GS %= TOP_GS/2;
+		GS %= (TOP_GS/16);
+		_delay_ms(100);
 	}
    
 	return 0;
