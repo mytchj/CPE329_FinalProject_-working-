@@ -26,6 +26,7 @@
 // helper functions
 void initGPIO();
 void initTimers();
+void initPCINT();
 
 
 #endif /* TMR_INT_UTIL_H_ */
