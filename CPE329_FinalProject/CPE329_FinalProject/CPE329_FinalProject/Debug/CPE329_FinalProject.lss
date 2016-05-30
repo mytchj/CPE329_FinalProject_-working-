@@ -19,15 +19,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   7 .debug_abbrev 000013fa  00000000  00000000  000077de  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   000010d9  00000000  00000000  00008bd8  2**0
+  8 .debug_line   000010c7  00000000  00000000  00008bd8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000007a8  00000000  00000000  00009cb4  2**2
+  9 .debug_frame  000007a8  00000000  00000000  00009ca0  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001a3a  00000000  00000000  0000a45c  2**0
+ 10 .debug_str    000019bb  00000000  00000000  0000a448  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00002b79  00000000  00000000  0000be96  2**0
+ 11 .debug_loc    00002b79  00000000  00000000  0000be03  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000002a8  00000000  00000000  0000ea0f  2**0
+ 12 .debug_ranges 000002a8  00000000  00000000  0000e97c  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1356,6 +1356,12 @@ size_t Print::println(int num, int base)
  702:	08 95       	ret
 
 00000704 <__vector_16>:
+#if defined(__AVR_ATtiny24__) || defined(__AVR_ATtiny44__) || defined(__AVR_ATtiny84__)
+ISR(TIM0_OVF_vect)
+#else
+ISR(TIMER0_OVF_vect)
+#endif
+{
  704:	1f 92       	push	r1
  706:	0f 92       	push	r0
  708:	0f b6       	in	r0, 0x3f	; 63
@@ -1367,29 +1373,52 @@ size_t Print::println(int num, int base)
  714:	9f 93       	push	r25
  716:	af 93       	push	r26
  718:	bf 93       	push	r27
+	// copy these to local variables so they can be stored in registers
+	// (volatile variables must be read from memory on every access)
+	unsigned long m = timer0_millis;
  71a:	80 91 c6 01 	lds	r24, 0x01C6
  71e:	90 91 c7 01 	lds	r25, 0x01C7
  722:	a0 91 c8 01 	lds	r26, 0x01C8
  726:	b0 91 c9 01 	lds	r27, 0x01C9
+	unsigned char f = timer0_fract;
  72a:	30 91 c5 01 	lds	r19, 0x01C5
+
+	m += MILLIS_INC;
+	f += FRACT_INC;
  72e:	23 e0       	ldi	r18, 0x03	; 3
  730:	23 0f       	add	r18, r19
+	if (f >= FRACT_MAX) {
  732:	2d 37       	cpi	r18, 0x7D	; 125
  734:	20 f4       	brcc	.+8      	; 0x73e <__vector_16+0x3a>
+	// copy these to local variables so they can be stored in registers
+	// (volatile variables must be read from memory on every access)
+	unsigned long m = timer0_millis;
+	unsigned char f = timer0_fract;
+
+	m += MILLIS_INC;
  736:	01 96       	adiw	r24, 0x01	; 1
  738:	a1 1d       	adc	r26, r1
  73a:	b1 1d       	adc	r27, r1
  73c:	05 c0       	rjmp	.+10     	; 0x748 <__vector_16+0x44>
+	f += FRACT_INC;
+	if (f >= FRACT_MAX) {
+		f -= FRACT_MAX;
  73e:	26 e8       	ldi	r18, 0x86	; 134
  740:	23 0f       	add	r18, r19
+		m += 1;
  742:	02 96       	adiw	r24, 0x02	; 2
  744:	a1 1d       	adc	r26, r1
  746:	b1 1d       	adc	r27, r1
+	}
+
+	timer0_fract = f;
  748:	20 93 c5 01 	sts	0x01C5, r18
+	timer0_millis = m;
  74c:	80 93 c6 01 	sts	0x01C6, r24
  750:	90 93 c7 01 	sts	0x01C7, r25
  754:	a0 93 c8 01 	sts	0x01C8, r26
  758:	b0 93 c9 01 	sts	0x01C9, r27
+	timer0_overflow_count++;
  75c:	80 91 ca 01 	lds	r24, 0x01CA
  760:	90 91 cb 01 	lds	r25, 0x01CB
  764:	a0 91 cc 01 	lds	r26, 0x01CC
@@ -1401,6 +1430,7 @@ size_t Print::println(int num, int base)
  776:	90 93 cb 01 	sts	0x01CB, r25
  77a:	a0 93 cc 01 	sts	0x01CC, r26
  77e:	b0 93 cd 01 	sts	0x01CD, r27
+}
  782:	bf 91       	pop	r27
  784:	af 91       	pop	r26
  786:	9f 91       	pop	r25
@@ -1414,62 +1444,137 @@ size_t Print::println(int num, int base)
  796:	18 95       	reti
 
 00000798 <init>:
+
+void init()
+{
+	// this needs to be called before setup() or some functions won't
+	// work there
+	sei();
  798:	78 94       	sei
+	
+	// on the ATmega168, timer 0 is also used for fast hardware pwm
+	// (using phase-correct PWM would mean that timer 0 overflowed half as often
+	// resulting in different millis() behavior on the ATmega8 and ATmega168)
+#if defined(TCCR0A) && defined(WGM01)
+	sbi(TCCR0A, WGM01);
  79a:	84 b5       	in	r24, 0x24	; 36
  79c:	82 60       	ori	r24, 0x02	; 2
  79e:	84 bd       	out	0x24, r24	; 36
+	sbi(TCCR0A, WGM00);
  7a0:	84 b5       	in	r24, 0x24	; 36
  7a2:	81 60       	ori	r24, 0x01	; 1
  7a4:	84 bd       	out	0x24, r24	; 36
+	// this combination is for the standard atmega8
+	sbi(TCCR0, CS01);
+	sbi(TCCR0, CS00);
+#elif defined(TCCR0B) && defined(CS01) && defined(CS00)
+	// this combination is for the standard 168/328/1280/2560
+	sbi(TCCR0B, CS01);
  7a6:	85 b5       	in	r24, 0x25	; 37
  7a8:	82 60       	ori	r24, 0x02	; 2
  7aa:	85 bd       	out	0x25, r24	; 37
+	sbi(TCCR0B, CS00);
  7ac:	85 b5       	in	r24, 0x25	; 37
  7ae:	81 60       	ori	r24, 0x01	; 1
  7b0:	85 bd       	out	0x25, r24	; 37
+
+	// enable timer 0 overflow interrupt
+#if defined(TIMSK) && defined(TOIE0)
+	sbi(TIMSK, TOIE0);
+#elif defined(TIMSK0) && defined(TOIE0)
+	sbi(TIMSK0, TOIE0);
  7b2:	ee e6       	ldi	r30, 0x6E	; 110
  7b4:	f0 e0       	ldi	r31, 0x00	; 0
  7b6:	80 81       	ld	r24, Z
  7b8:	81 60       	ori	r24, 0x01	; 1
  7ba:	80 83       	st	Z, r24
+	// this is better for motors as it ensures an even waveform
+	// note, however, that fast pwm mode can achieve a frequency of up
+	// 8 MHz (with a 16 MHz clock) at 50% duty cycle
+
+#if defined(TCCR1B) && defined(CS11) && defined(CS10)
+	TCCR1B = 0;
  7bc:	e1 e8       	ldi	r30, 0x81	; 129
  7be:	f0 e0       	ldi	r31, 0x00	; 0
  7c0:	10 82       	st	Z, r1
+
+	// set timer 1 prescale factor to 64
+	sbi(TCCR1B, CS11);
  7c2:	80 81       	ld	r24, Z
  7c4:	82 60       	ori	r24, 0x02	; 2
  7c6:	80 83       	st	Z, r24
+#if F_CPU >= 8000000L
+	sbi(TCCR1B, CS10);
  7c8:	80 81       	ld	r24, Z
  7ca:	81 60       	ori	r24, 0x01	; 1
  7cc:	80 83       	st	Z, r24
+	sbi(TCCR1, CS10);
+#endif
+#endif
+	// put timer 1 in 8-bit phase correct pwm mode
+#if defined(TCCR1A) && defined(WGM10)
+	sbi(TCCR1A, WGM10);
  7ce:	e0 e8       	ldi	r30, 0x80	; 128
  7d0:	f0 e0       	ldi	r31, 0x00	; 0
  7d2:	80 81       	ld	r24, Z
  7d4:	81 60       	ori	r24, 0x01	; 1
  7d6:	80 83       	st	Z, r24
+
+	// set timer 2 prescale factor to 64
+#if defined(TCCR2) && defined(CS22)
+	sbi(TCCR2, CS22);
+#elif defined(TCCR2B) && defined(CS22)
+	sbi(TCCR2B, CS22);
  7d8:	e1 eb       	ldi	r30, 0xB1	; 177
  7da:	f0 e0       	ldi	r31, 0x00	; 0
  7dc:	80 81       	ld	r24, Z
  7de:	84 60       	ori	r24, 0x04	; 4
  7e0:	80 83       	st	Z, r24
+
+	// configure timer 2 for phase correct pwm (8-bit)
+#if defined(TCCR2) && defined(WGM20)
+	sbi(TCCR2, WGM20);
+#elif defined(TCCR2A) && defined(WGM20)
+	sbi(TCCR2A, WGM20);
  7e2:	e0 eb       	ldi	r30, 0xB0	; 176
  7e4:	f0 e0       	ldi	r31, 0x00	; 0
  7e6:	80 81       	ld	r24, Z
  7e8:	81 60       	ori	r24, 0x01	; 1
  7ea:	80 83       	st	Z, r24
+#endif
+
+#if defined(ADCSRA)
+	// set a2d prescaler so we are inside the desired 50-200 KHz range.
+	#if F_CPU >= 16000000 // 16 MHz / 128 = 125 KHz
+		sbi(ADCSRA, ADPS2);
  7ec:	ea e7       	ldi	r30, 0x7A	; 122
  7ee:	f0 e0       	ldi	r31, 0x00	; 0
  7f0:	80 81       	ld	r24, Z
  7f2:	84 60       	ori	r24, 0x04	; 4
  7f4:	80 83       	st	Z, r24
+		sbi(ADCSRA, ADPS1);
  7f6:	80 81       	ld	r24, Z
  7f8:	82 60       	ori	r24, 0x02	; 2
  7fa:	80 83       	st	Z, r24
+		sbi(ADCSRA, ADPS0);
  7fc:	80 81       	ld	r24, Z
  7fe:	81 60       	ori	r24, 0x01	; 1
  800:	80 83       	st	Z, r24
+		cbi(ADCSRA, ADPS2);
+		cbi(ADCSRA, ADPS1);
+		sbi(ADCSRA, ADPS0);
+	#endif
+	// enable a2d conversions
+	sbi(ADCSRA, ADEN);
  802:	80 81       	ld	r24, Z
  804:	80 68       	ori	r24, 0x80	; 128
  806:	80 83       	st	Z, r24
+	// here so they can be used as normal digital i/o; they will be
+	// reconnected in Serial.begin()
+#if defined(UCSRB)
+	UCSRB = 0;
+#elif defined(UCSR0B)
+	UCSR0B = 0;
  808:	10 92 c1 00 	sts	0x00C1, r1
  80c:	08 95       	ret
 

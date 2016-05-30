@@ -1,7 +1,4 @@
-﻿#define TOP_GS 1250
-#define GS_DELAY 5
-
-#include "SparkFun_Tlc5940.h"
+﻿#include "SparkFun_Tlc5940.h"
 #include "rgbUtil.h"
 #include "tmr_int_util.h"
 
