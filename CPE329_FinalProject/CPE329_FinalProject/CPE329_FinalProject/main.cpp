@@ -7,8 +7,8 @@ int chan = 0; // LED channel
 uint32_t dt_us = 0;
 
 int main(void){
-   uint32_t speed = 2200;
-   uint8_t increment = 256;
+   uint32_t speed = 999999;
+   uint32_t increment = 256;
    
 	_delay_ms(100);			// startup delay
 	
@@ -21,26 +21,29 @@ int main(void){
 	initPCINT();
 	sei();
    
-	// Turn on full, then fade off
-	while(GS >= 0){
-		setAllLEDs(GS,0,0);
-		GS--;					// increment GS
-      
-		_delay_ms(GS_DELAY);	// delay GS color
-	}
+	//// Turn on full, then fade off
+	//while(GS >= 0){
+		//setAllLEDs(GS,0,0);
+		//GS--;					// increment GS
+      //
+		//_delay_ms(GS_DELAY);	// delay GS color
+	//}
    
 	// Temporary idea: Determine the bottom/back LED, send it to rgbUtil so that
 	//  it knows which led to cycle to next
 	setBottomLED(0);
+	setAmbientColor(0, 0, TOP_GS/15);
    
 	//Infintely cycle an LED around the loop
 	while (1) {
 		nextLED(speed);
       
       /* Testing speed change */
-      if (speed > 2305 || speed < 256)
-         increment *= -1;
-      speed -= increment;
+      //if (speed > 10000 || speed < 256)
+      if(speed > 0)
+	    speed--;
+		// increment *= -1;
+      //speed += increment;
       
       /* Test Ambient Colors with fade */
 //		setAmbientColor(GS, 0, 0);
