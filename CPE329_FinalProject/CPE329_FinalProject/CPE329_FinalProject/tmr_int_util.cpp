@@ -18,7 +18,6 @@ void initGPIO(){
 	PORTB |= (1<<HALLEFFECT1);
 	PORTD |= (1<<HALLEFFECT2);
 	PORTC |= (1<<HALLEFFECT3);
-	
 }
 
 // sets up the timers
@@ -35,6 +34,8 @@ void initTimers(){
 
 // sets up all three PCINT vectors for each halleffect sensor
 void initPCINT(){
+	cli();		// clear interrupts
+	
 	// enable PCINT (2:0)
 	PCICR = 0b00000111;
 	
