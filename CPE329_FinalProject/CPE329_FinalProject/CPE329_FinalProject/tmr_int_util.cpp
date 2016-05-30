@@ -9,10 +9,10 @@
 
 // sets up the inputs, outputs and internal pull-ups 
 void initGPIO(){
-	// all hall effect sensors are outputs
-	DDRB |= (1<<HALLEFFECT1);
-	DDRD |= (1<<HALLEFFECT2);
-	DDRC |= (1<<HALLEFFECT3);
+	// all hall effect sensors are inputs
+	DDRB &= ~(1<<HALLEFFECT1);
+	DDRD &= ~(1<<HALLEFFECT2);
+	DDRC &= ~(1<<HALLEFFECT3);
 	
 	// turn on internal pull-up for hall effects
 	PORTB |= (1<<HALLEFFECT1);
@@ -50,5 +50,7 @@ void initPCINT(){
 	
 	// set the PCINT flag register for all 3 PCINTs
 	PCIFR = 0b00000111;
+	
+	sei();
 }
 
