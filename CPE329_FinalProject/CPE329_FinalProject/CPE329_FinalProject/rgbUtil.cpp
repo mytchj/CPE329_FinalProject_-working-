@@ -23,7 +23,7 @@
 uint8_t bottomLED = -1;
 uint8_t currentLED = -1;
 
-uint32_t lastDelaT = 0;
+uint32_t lastDeltaT = 0;
 
 uint8_t brightnesslevel = 15;
 uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 16, 2 * TOP_GS / 16,
@@ -121,7 +121,7 @@ void setBrakeBrightness(int deltaT) {
    static uint_8 faster = 0; // To avoid lots of minute adjustments
    static uint8_t slower = 0;
    
-   if (deltaT < lastDelaT) {
+   if (deltaT < lastDeltaT) {
       slower++:
       faster = 0;
    }
@@ -143,7 +143,7 @@ void setBrakeBrightness(int deltaT) {
       }
    }
    
-   lastDelaT = deltaT;
+   lastDeltaT = deltaT;
 }
 
 void setLED(int ledNum, color color) {
