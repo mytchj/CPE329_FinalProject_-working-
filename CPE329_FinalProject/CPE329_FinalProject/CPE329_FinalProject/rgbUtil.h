@@ -23,6 +23,9 @@ typedef struct color{
 /* Cycles to the next LED in the progression */
 void nextLED();
 
+/* Call this if the wheel is stopped */
+void stopped();
+
 /* Sets the bottom LED - PROBABLY WILL CHANGE BASED ON IMPLEMENTATION */
 void setBottomLED(int LED);
 

@@ -67,8 +67,6 @@ void nextLED() {
    
    Serial.println(TOP_GS);
    Tlc.clear();
-//   Tlc.setAll(ambientColor);
-   setAllLEDs(ambientColor);
    
    for (ndx = 0; ndx < numLeds; ndx++) {
       if (ndx == currentLED)
@@ -83,13 +81,29 @@ void nextLED() {
    currentLED %= numLeds;
 }
 
+void stopped() {
+   int ndx;
+   
+   Tlc.clear();
+   
+   for (ndx = 0; ndx < numLeds; ndx++) {
+      if (ndx == currentLED)
+         setLED(ndx, rearLight);
+      else
+         setLED(ndx, ambientColor.);
+   }
+   
+   Tlc.update();
+}
+
 void setLED(int ledNum, color color) {
-   int offset = 0;
+   int offset = -1;
+   ledNum *= numLeds;
    
    if (R_ENABLE)
-      Tlc.set(ledNum + offset++, color.r);
+      Tlc.set(ledNum + ++offset, color.r);
    if (G_ENABLE)
-      Tlc.set(ledNum + offset++, color.g);
+      Tlc.set(ledNum + ++offset, color.g);
    if (B_ENABLE)
-      Tlc.set(ledNum + offset++, color.b);
+      Tlc.set(ledNum + ++offset, color.b);
 }
