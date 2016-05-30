@@ -27,10 +27,10 @@ void initTimers(){
 	
 	// timer0 (8bit) 0->255
 	TCCR0A = 0x02;		// set timer to CTC mode
-	TCCR0B = 0x01;		// set pre-scaler to 1
-	OCR0A = 250;		// overflow set to 250
+	TCCR0B = 0x02;		// set pre-scaler to 8
+	OCR0A = OCR0A_OVR;	// overflow value 
 	TIMSK0 = 0x02;		// timer mask interrupt on OCR0A overflow
-	TIFR0 = 0x02;		// set overflow to OCR0A value (250)
+	TIFR0 = 0x02;		// set overflow to OCR0A value
 }
 
 // sets up all three PCINT vectors for each halleffect sensor

@@ -8,7 +8,7 @@
 
 #include "rgbUtil.h"
 
-#define NUM_COLOR_CHANNELS 1
+#define NUM_COLOR_CHANNELS 3
 #define NUM_LED_CHANNELS 16
 #define DIRECTION 1  // A macro to correct the direction of the cycle, depending on the physical setup
 #define TOP_GS 1250

@@ -4,6 +4,7 @@
 
 int GS = TOP_GS; //0   // LED greyscale
 int chan = 0; // LED channel
+uint32_t dt = 0;
 
 int main(void){
 	_delay_ms(100);			// startup delay
@@ -13,7 +14,7 @@ int main(void){
 	Tlc.init();				// initialize the TLC chip
 	
 	initGPIO();
-	//initTimers();
+	initTimers();
 	//initPCINT();
 	//sei();
    
@@ -41,6 +42,10 @@ int main(void){
 	return 0;
 }
 
+
+ISR(TIMER0_COMPA_vect){
+	dt = dt + 100;
+}
 
 // ISR for halleffect1 at pin D8
 // enters ISR when set from high (from pull-up) to low
