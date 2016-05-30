@@ -13,12 +13,23 @@
 #define DIRECTION 1  // A macro to correct the direction of the cycle, depending on the physical setup
 #define TOP_GS 1250
 
+#define BRIGHTNESS_LEVELS 16
+#define MAX_BRIGHTNESS 15
+
 #define R_ENABLE 1
 #define G_ENABLE 1
 #define B_ENABLE 1
 
 uint8_t bottomLED = -1;
 uint8_t currentLED = -1;
+
+uint32_t lastDelaT = 0;
+
+uint8_t brightnesslevel = 15;
+uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 16, 2 * TOP_GS / 16,
+   3 * TOP_GS / 16, 4 *  TOP_GS / 16, 5 * TOP_GS / 16, 6 * TOP_GS / 16,
+   7 * TOP_GS / 16, 8 * TOP_GS / 16, 9 * TOP_GS / 16, 10 * TOP_GS / 16,
+   11 * TOP_GS / 16, 12 * TOP_GS / 16, 13 * TOP_GS / 16, 14 * TOP_GS / 16, TOP_GS}
 
 static uint8_t numColorChannels = R_ENABLE + G_ENABLE + B_ENABLE;
 static uint8_t numLeds = NUM_LED_CHANNELS / numColorChannels;
@@ -59,6 +70,14 @@ void setAmbientColor(int r, int g, int b) {
    ambientColor.b = b;
 }
 
+void nextLED(uint32_t deltaT) {
+   setBrakeBrightness(deltaT);
+   
+   rearLight.r = brightnessSteps[brightnesslevel];
+   
+   nextLED();
+}
+
 void nextLED() {
    int ndx;
    
@@ -84,6 +103,8 @@ void nextLED() {
 void stopped() {
    int ndx;
    
+   brightnesslevel = 15;
+   
    Tlc.clear();
    
    for (ndx = 0; ndx < numLeds; ndx++) {
@@ -96,9 +117,38 @@ void stopped() {
    Tlc.update();
 }
 
+void setBrakeBrightness(int deltaT) {
+   static uint_8 faster = 0; // To avoid lots of minute adjustments
+   static uint8_t slower = 0;
+   
+   if (deltaT < lastDelaT) {
+      slower++:
+      faster = 0;
+   }
+   else {
+      faster++;
+      slower = 0;
+   }
+   
+   if (faster >= 10) {
+      faster = 0;
+      if (brightnesslevel > 0)
+         brightnesslevel--;
+   }
+   
+   if (slower >= 10) {
+      slower = 0;
+      if (brightnesslevel < MAX_BRIGHTNESS) {
+         brightnesslevel++;
+      }
+   }
+   
+   lastDelaT = deltaT;
+}
+
 void setLED(int ledNum, color color) {
    int offset = -1;
-   ledNum *= numLeds;
+   ledNum *= numColorChannels;
    
    if (R_ENABLE)
       Tlc.set(ledNum + ++offset, color.r);
