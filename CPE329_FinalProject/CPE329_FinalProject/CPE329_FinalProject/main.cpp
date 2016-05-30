@@ -15,7 +15,7 @@ int main(void){
    
    // Turn on full, then fade off
    while(GS >= 0){
-      setAllLEDs(GS);
+      setAllLEDs(GS, 0, 0);
       GS--;         // increment GS
       
       _delay_ms(GS_DELAY);  // delay GS color
@@ -28,6 +28,9 @@ int main(void){
    //Infintely cycle an LED around the loop
    while (1) {
       nextLED();
+      setAmbientColor(GS, 0, 0);
+      GS++;
+      GS %= TOP_GS;
    }
    
   return 0;

@@ -17,10 +17,10 @@ int bottomLED = -1;
 int currentLED = -1;
 static color ambientColor = 0;
 
-void setAllLEDs(int gs) {
-   Serial.println(gs);   // print GS data to Serial window (BAUD =9600)
+void setAllLEDs(int r, int g, int b) {
+   Serial.println(r);   // print GS data to Serial window (BAUD =9600)
    Tlc.clear();      // clear TLC data
-   Tlc.setAll(gs);     // set all TLC channel (15:0) to GS value
+   Tlc.setAll(r);     // set all TLC channel (15:0) to GS value
    Tlc.update();     // send GS data to TLC5940
 }
 
@@ -30,7 +30,9 @@ void setBottomLED(int LED) {
 }
 
 void setAmbientColor(int r, int g, int b) {
-   ambientColor.r = int r;
+   ambientColor.r = r;
+   ambientColor.g = g;
+   ambientColor.b = b;
 }
 
 void nextLED() {
@@ -39,7 +41,7 @@ void nextLED() {
    
    Serial.println(TOP_GS);
    Tlc.clear();
-   //Tlc.setAll(ambientColor);
+   Tlc.setAll(ambientColor);
    Tlc.set(currentLED, TOP_GS);
    Tlc.update();
    

@@ -20,9 +20,16 @@ typedef struct color{
    uint16_t b;
 } color;
 
+/* Cycles to the next LED in the progression */
+void nextLED();
+
+/* Sets the bottom LED - PROBABLY WILL CHANGE BASED ON IMPLEMENTATION */
+void setBottomLED(int LED);
+
+/* Sets all LEDs to have the color made by r, g, and b */
+void setAllLEDs(int r, int g, int b);
+
 /* Sets the ambient color of the wheel to ambient */
 void setAmbientColor(int r, int g, int b);
-
-
 
 #endif /* rgbUtil_h */
