@@ -54,6 +54,6 @@ void nextLED() {
    
    Tlc.update();
    
-   currentLED += DIRECTION * NUM_COLOR_CHANNELS;
-   currentLED %= NUM_LED_CHANNELS;
+   if ((currentLED += DIRECTION * NUM_COLOR_CHANNELS) > NUM_COLOR_CHANNELS)
+      currentLED = 0;
 }
