@@ -7,6 +7,9 @@ int chan = 0; // LED channel
 uint32_t dt_us = 0;
 
 int main(void){
+   uint32_t speed = 0;
+   uint8_t increment = 256;
+   
 	_delay_ms(100);			// startup delay
 	
 	init();					// initializations for Arduino.h
@@ -32,10 +35,18 @@ int main(void){
    
 	//Infintely cycle an LED around the loop
 	while (1) {
-		nextLED();
-		setAmbientColor(GS, 0, 0);
-		GS++;
-		GS %= (TOP_GS/16);
+		nextLED(speed);
+      
+      /* Testing speed change */
+      if (speed > 2305 || speed < 256)
+         increment *= -1;
+      speed += increment;
+      
+      /* Test Ambient Colors with fade */
+//		setAmbientColor(GS, 0, 0);
+//		GS++;
+//		GS %= (TOP_GS/16);
+      
 		_delay_ms(100);
 	}
    
