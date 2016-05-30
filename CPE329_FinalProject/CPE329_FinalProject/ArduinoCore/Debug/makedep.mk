@@ -2,53 +2,53 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-src\core\abi.cpp
+core\abi.cpp
 
-src\core\CDC.cpp
+core\CDC.cpp
 
-src\core\HardwareSerial.cpp
+core\HardwareSerial.cpp
 
-src\core\HardwareSerial0.cpp
+core\HardwareSerial0.cpp
 
-src\core\HardwareSerial1.cpp
+core\HardwareSerial1.cpp
 
-src\core\HardwareSerial2.cpp
+core\HardwareSerial2.cpp
 
-src\core\HardwareSerial3.cpp
+core\HardwareSerial3.cpp
 
-src\core\HID.cpp
+core\HID.cpp
 
-src\core\hooks.c
+core\hooks.c
 
-src\core\IPAddress.cpp
+core\IPAddress.cpp
 
-src\core\main.cpp
+core\main.cpp
 
-src\core\new.cpp
+core\new.cpp
 
-src\core\Print.cpp
+core\Print.cpp
 
-src\core\Stream.cpp
+core\Stream.cpp
 
-src\core\Tone.cpp
+core\Tone.cpp
 
-src\core\USBCore.cpp
+core\USBCore.cpp
 
-src\core\WInterrupts.c
+core\WInterrupts.c
 
-src\core\wiring.c
+core\wiring.c
 
-src\core\wiring_analog.c
+core\wiring_analog.c
 
-src\core\wiring_digital.c
+core\wiring_digital.c
 
-src\core\wiring_pulse.c
+core\wiring_pulse.c
 
-src\core\wiring_shift.c
+core\wiring_shift.c
 
-src\core\WMath.cpp
+core\WMath.cpp
 
-src\core\WString.cpp
+core\WString.cpp
 
 src\libraries\SparkFun_TLC5940\SparkFun_Tlc5940.cpp
 

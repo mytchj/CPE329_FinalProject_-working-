@@ -1,7 +1,4 @@
-﻿#define TOP_GS 1250
-#define GS_DELAY 5
-
-#include "SparkFun_Tlc5940.h"
+﻿#include "SparkFun_Tlc5940.h"
 #include "rgbUtil.h"
 #include "tmr_int_util.h"
 
@@ -15,7 +12,7 @@ int main(void){
    
    // Turn on full, then fade off
    while(GS >= 0){
-      setAllLEDs(GS, 0, 0);
+	  setAllLEDs(GS,0,0);
       GS--;         // increment GS
       
       _delay_ms(GS_DELAY);  // delay GS color
@@ -30,7 +27,7 @@ int main(void){
       nextLED();
       setAmbientColor(GS, 0, 0);
       GS++;
-      GS %= TOP_GS;
+      GS %= TOP_GS/2;
    }
    
   return 0;
