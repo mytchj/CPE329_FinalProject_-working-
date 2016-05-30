@@ -10,11 +10,12 @@
 
 #define NUM_COLOR_CHANNELS 1
 #define NUM_LED_CHANNELS 16
-#define DIRECTION 1  // A macro to correct the direction of the cycle, depending on the physical setup
+#define DIRECTION -1  // A macro to correct the direction of the cycle, depending on the physical setup
 #define TOP_GS 1250
 
 int bottomLED = -1;
 int currentLED = -1;
+static color ambientColor = 0;
 
 void setAllLEDs(int gs) {
    Serial.println(gs);   // print GS data to Serial window (BAUD =9600)
@@ -28,12 +29,17 @@ void setBottomLED(int LED) {
    bottomLED = LED;
 }
 
+void setAmbientColor(int r, int g, int b) {
+   ambientColor.r = int r;
+}
+
 void nextLED() {
    if (currentLED < 0)
       currentLED = bottomLED; // Definitely subject to change, just a placeholder
    
    Serial.println(TOP_GS);
    Tlc.clear();
+   //Tlc.setAll(ambientColor);
    Tlc.set(currentLED, TOP_GS);
    Tlc.update();
    
