@@ -13,7 +13,9 @@
 #include <Arduino.h>      // this is needed to run the SparkFun library
 #include "SparkFun_Tlc5940.h"
 
-
+void nextLED();
+void setBottomLED(int LED);
+void setAllLEDs(int gs);
 
 
 #endif /* rgbUtil_h */
