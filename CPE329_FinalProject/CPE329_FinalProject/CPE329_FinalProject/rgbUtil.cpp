@@ -8,19 +8,43 @@
 
 #include "rgbUtil.h"
 
-#define NUM_COLOR_CHANNELS 3
+//#define NUM_COLOR_CHANNELS 3
 #define NUM_LED_CHANNELS 16
 #define DIRECTION 1  // A macro to correct the direction of the cycle, depending on the physical setup
 #define TOP_GS 1250
 
-int bottomLED = -1;
-int currentLED = -1;
-static color ambientColor = {0,0,0};
+#define R_ENABLE 1
+#define G_ENABLE 1
+#define B_ENABLE 1
+
+uint_8 bottomLED = -1;
+uint_8 currentLED = -1;
+
+static uint_8 numColorChannels = R_ENABLE + G_ENABLE + B_ENABLE;
+static uint_8 numLeds = NUM_LED_CHANNELS / numColorChannels;
+
+color ambientColor = {0,0,0};
+color rearLight = {TOP_GS, 0, 0};
+
+
+void setLED(int ledNum, color color);
+void setAllLEDs(color solid);
 
 void setAllLEDs(int r, int g, int b) {
+   color solid = {r, g, b};
+   
+   setAllLEDs(solid);
+}
+
+void setAllLEDs(color solid) {
+   int ndx;
    Serial.println(r);   // print GS data to Serial window (BAUD =9600)
    Tlc.clear();      // clear TLC data
-   Tlc.setAll(r);     // set all TLC channel (15:0) to GS value
+   //   Tlc.setAll(r);     // set all TLC channel (15:0) to GS value
+   
+   for (ndx = 0; ndx < numLeds; ndx++)
+      setLED(ndx, solid);
+   
    Tlc.update();     // send GS data to TLC5940
 }
 
@@ -44,16 +68,28 @@ void nextLED() {
    Serial.println(TOP_GS);
    Tlc.clear();
 //   Tlc.setAll(ambientColor);
+   setAllLEDs(ambientColor);
    
-   for (ndx = 0; ndx < NUM_LED_CHANNELS; ndx++) {
+   for (ndx = 0; ndx < numLeds; ndx++) {
       if (ndx == currentLED)
-         Tlc.set(ndx, TOP_GS);
+         setLED(ndx, rearLight);
       else
-         Tlc.set(ndx, ambientColor.r);
+         setLED(ndx, ambientColor.);
    }
    
    Tlc.update();
    
-   if ((currentLED += DIRECTION * NUM_COLOR_CHANNELS) > NUM_COLOR_CHANNELS)
-      currentLED = 0;
+   currentLED++;
+   currentLED %= numLeds;
+}
+
+void setLED(int ledNum, color color) {
+   int offset = 0;
+   
+   if (R_ENABLE)
+      Tlc.set(ledNum + offset++, color.r);
+   if (G_ENABLE)
+      Tlc.set(ledNum + offset++, color.g);
+   if (B_ENABLE)
+      Tlc.set(ledNum + offset++, color.b);
 }
