@@ -12,7 +12,7 @@ int main(void){
    
    // Turn on full, then fade off
    while(GS >= 0){
-      setAllLEDs(GS, 0, 0);
+	  setAllLEDs(GS,0,0);
       GS--;         // increment GS
       
       _delay_ms(GS_DELAY);  // delay GS color
@@ -27,7 +27,7 @@ int main(void){
       nextLED();
       setAmbientColor(GS, 0, 0);
       GS++;
-      GS %= TOP_GS;
+      GS %= TOP_GS/2;
    }
    
   return 0;

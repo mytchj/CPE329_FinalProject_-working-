@@ -15,7 +15,7 @@
 
 int bottomLED = -1;
 int currentLED = -1;
-static color ambientColor = 0;
+static color ambientColor = {0,0,0};
 
 void setAllLEDs(int r, int g, int b) {
    Serial.println(r);   // print GS data to Serial window (BAUD =9600)
@@ -41,7 +41,7 @@ void nextLED() {
    
    Serial.println(TOP_GS);
    Tlc.clear();
-   Tlc.setAll(ambientColor);
+   Tlc.setAll(ambientColor.r);
    Tlc.set(currentLED, TOP_GS);
    Tlc.update();
    
