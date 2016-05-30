@@ -17,6 +17,7 @@
 // constants 
 #define TOP_GS 1250
 #define GS_DELAY 5
+#define OCR0A_OVR 200
 
 // standard libraries 
 #include <avr/io.h>
