@@ -10,9 +10,9 @@
 #define TMR_INT_UTIL_H_
 
 // GPIO
-#define HALLEFFECT1 
-#define HALLEFFECT2
-#define HALLEFFECT3
+#define HALLEFFECT1 PB0		// digital pin D8
+#define HALLEFFECT2 PD7		// digital pin D7
+#define HALLEFFECT3 PC0		// analog pin A0
 
 // constants 
 #define TOP_GS 1250
