@@ -87,8 +87,6 @@ Discarded input sections
  .text          0x00000000        0x0 tmr_int_util.o
  .data          0x00000000        0x0 tmr_int_util.o
  .bss           0x00000000        0x0 tmr_int_util.o
- .text._Z9initPCINTv
-                0x00000000       0x1a tmr_int_util.o
  .text          0x00000000        0x0 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
  .data          0x00000000        0x0 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
  .bss           0x00000000        0x0 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
@@ -544,7 +542,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0xb2e
+.text           0x00000000      0xbc0
  *(.vectors)
  .vectors       0x00000000       0x68 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.0.98/gcc/dev/atmega328p/avr5/crtatmega328p.o
                 0x00000000                __vector_default
@@ -625,131 +623,134 @@ END GROUP
                 0x000000be                . = ALIGN (0x2)
  *(.text.*)
  .text.startup.main
-                0x000000be       0xb2 main.o
+                0x000000be       0xb8 main.o
                 0x000000be                main
  .text.__vector_14
-                0x00000170       0x4c main.o
-                0x00000170                __vector_14
+                0x00000176       0x70 main.o
+                0x00000176                __vector_14
  .text.__vector_3
-                0x000001bc       0x14 main.o
-                0x000001bc                __vector_3
+                0x000001e6       0x2a main.o
+                0x000001e6                __vector_3
  .text.__vector_4
-                0x000001d0       0x14 main.o
-                0x000001d0                __vector_4
+                0x00000210       0x2a main.o
+                0x00000210                __vector_4
  .text.__vector_5
-                0x000001e4       0x14 main.o
-                0x000001e4                __vector_5
+                0x0000023a       0x2a main.o
+                0x0000023a                __vector_5
  .text._Z10setAllLEDsiii
-                0x000001f8       0x32 rgbUtil.o
-                0x000001f8                _Z10setAllLEDsiii
+                0x00000264       0x32 rgbUtil.o
+                0x00000264                _Z10setAllLEDsiii
  .text._Z12setBottomLEDi
-                0x0000022a        0xa rgbUtil.o
-                0x0000022a                _Z12setBottomLEDi
+                0x00000296        0xa rgbUtil.o
+                0x00000296                _Z12setBottomLEDi
  .text._Z15setAmbientColoriii
-                0x00000234       0x12 rgbUtil.o
-                0x00000234                _Z15setAmbientColoriii
+                0x000002a0       0x12 rgbUtil.o
+                0x000002a0                _Z15setAmbientColoriii
  .text._Z7nextLEDv
-                0x00000246       0x90 rgbUtil.o
-                0x00000246                _Z7nextLEDv
+                0x000002b2       0x9a rgbUtil.o
+                0x000002b2                _Z7nextLEDv
  .text._Z8initGPIOv
-                0x000002d6        0xe tmr_int_util.o
-                0x000002d6                _Z8initGPIOv
+                0x0000034c        0xe tmr_int_util.o
+                0x0000034c                _Z8initGPIOv
  .text._Z10initTimersv
-                0x000002e4       0x12 tmr_int_util.o
-                0x000002e4                _Z10initTimersv
+                0x0000035a       0x12 tmr_int_util.o
+                0x0000035a                _Z10initTimersv
+ .text._Z9initPCINTv
+                0x0000036c       0x1c tmr_int_util.o
+                0x0000036c                _Z9initPCINTv
  .text.__vector_18
-                0x000002f6       0x64 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
-                0x000002f6                __vector_18
+                0x00000388       0x64 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+                0x00000388                __vector_18
  .text.__vector_19
-                0x0000035a       0x4c C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
-                0x0000035a                __vector_19
+                0x000003ec       0x4c C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+                0x000003ec                __vector_19
  .text.startup._GLOBAL__sub_I___vector_18
-                0x000003a6       0x5a C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+                0x00000438       0x5a C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
  .text._ZN5Print5writeEPKhj
-                0x00000400       0x50 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00000400                _ZN5Print5writeEPKhj
+                0x00000492       0x50 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00000492                _ZN5Print5writeEPKhj
  .text._ZN5Print5writeEPKc
-                0x00000450       0x2a C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00000450                _ZN5Print5writeEPKc
+                0x000004e2       0x2a C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x000004e2                _ZN5Print5writeEPKc
  .text._ZN5Print5printEc
-                0x0000047a        0xe C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x0000047a                _ZN5Print5printEc
+                0x0000050c        0xe C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x0000050c                _ZN5Print5printEc
  .text._ZN5Print7printlnEv
-                0x00000488        0x8 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00000488                _ZN5Print7printlnEv
+                0x0000051a        0x8 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x0000051a                _ZN5Print7printlnEv
  .text._ZN5Print11printNumberEmh
-                0x00000490       0xac C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x00000490                _ZN5Print11printNumberEmh
+                0x00000522       0xac C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00000522                _ZN5Print11printNumberEmh
  .text._ZN5Print5printEli
-                0x0000053c       0x94 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x0000053c                _ZN5Print5printEli
+                0x000005ce       0x94 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x000005ce                _ZN5Print5printEli
  .text._ZN5Print7printlnEii
-                0x000005d0       0x2e C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
-                0x000005d0                _ZN5Print7printlnEii
+                0x00000662       0x2e C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+                0x00000662                _ZN5Print7printlnEii
  .text.__vector_16
-                0x000005fe       0x94 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
-                0x000005fe                __vector_16
- .text.init     0x00000692       0x76 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
-                0x00000692                init
+                0x00000690       0x94 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x00000690                __vector_16
+ .text.init     0x00000724       0x76 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+                0x00000724                init
  .text.__vector_13
-                0x00000708       0x6a C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
-                0x00000708                __vector_13
+                0x0000079a       0x6a C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+                0x0000079a                __vector_13
  .text._ZN7Tlc59403setEhj
-                0x00000772       0x3e C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
-                0x00000772                _ZN7Tlc59403setEhj
+                0x00000804       0x3e C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+                0x00000804                _ZN7Tlc59403setEhj
  .text._ZN7Tlc59406setAllEj
-                0x000007b0       0x32 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
-                0x000007b0                _ZN7Tlc59406setAllEj
+                0x00000842       0x32 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+                0x00000842                _ZN7Tlc59406setAllEj
  .text._ZN7Tlc59405clearEv
-                0x000007e2        0x8 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
-                0x000007e2                _ZN7Tlc59405clearEv
+                0x00000874        0x8 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+                0x00000874                _ZN7Tlc59405clearEv
  .text._Z15tlc_shift8_initv
-                0x000007ea       0x12 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
-                0x000007ea                _Z15tlc_shift8_initv
+                0x0000087c       0x12 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+                0x0000087c                _Z15tlc_shift8_initv
  .text._Z10tlc_shift8h
-                0x000007fc        0xa C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
-                0x000007fc                _Z10tlc_shift8h
+                0x0000088e        0xa C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+                0x0000088e                _Z10tlc_shift8h
  .text._ZN7Tlc59406updateEv
-                0x00000806       0x6c C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
-                0x00000806                _ZN7Tlc59406updateEv
+                0x00000898       0x6c C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+                0x00000898                _ZN7Tlc59406updateEv
  .text._ZN7Tlc59404initEj
-                0x00000872       0xa8 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
-                0x00000872                _ZN7Tlc59404initEj
+                0x00000904       0xa8 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+                0x00000904                _ZN7Tlc59404initEj
  .text._ZN14HardwareSerial9availableEv
-                0x0000091a       0x18 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x0000091a                _ZN14HardwareSerial9availableEv
+                0x000009ac       0x18 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x000009ac                _ZN14HardwareSerial9availableEv
  .text._ZN14HardwareSerial4peekEv
-                0x00000932       0x1c C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x00000932                _ZN14HardwareSerial4peekEv
+                0x000009c4       0x1c C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x000009c4                _ZN14HardwareSerial4peekEv
  .text._ZN14HardwareSerial4readEv
-                0x0000094e       0x28 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x0000094e                _ZN14HardwareSerial4readEv
+                0x000009e0       0x28 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x000009e0                _ZN14HardwareSerial4readEv
  .text._ZN14HardwareSerial17_tx_udr_empty_irqEv
-                0x00000976       0x42 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x00000976                _ZN14HardwareSerial17_tx_udr_empty_irqEv
+                0x00000a08       0x42 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00000a08                _ZN14HardwareSerial17_tx_udr_empty_irqEv
  .text._ZN14HardwareSerial5flushEv
-                0x000009b8       0x44 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x000009b8                _ZN14HardwareSerial5flushEv
+                0x00000a4a       0x44 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00000a4a                _ZN14HardwareSerial5flushEv
  .text._ZN14HardwareSerial5writeEh
-                0x000009fc       0x8e C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
-                0x000009fc                _ZN14HardwareSerial5writeEh
+                0x00000a8e       0x8e C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+                0x00000a8e                _ZN14HardwareSerial5writeEh
  .text.libgcc.div
-                0x00000a8a       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_divmodhi4.o)
-                0x00000a8a                _div
-                0x00000a8a                __divmodhi4
+                0x00000b1c       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_divmodhi4.o)
+                0x00000b1c                _div
+                0x00000b1c                __divmodhi4
  .text.libgcc.div
-                0x00000ab2       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
-                0x00000ab2                __udivmodsi4
+                0x00000b44       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodsi4.o)
+                0x00000b44                __udivmodsi4
  .text.libgcc.div
-                0x00000af6       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodhi4.o)
-                0x00000af6                __udivmodhi4
- .text.libgcc   0x00000b1e        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
-                0x00000b1e                __tablejump2__
-                0x00000b2a                . = ALIGN (0x2)
+                0x00000b88       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_udivmodhi4.o)
+                0x00000b88                __udivmodhi4
+ .text.libgcc   0x00000bb0        0xc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_tablejump2.o)
+                0x00000bb0                __tablejump2__
+                0x00000bbc                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000b2a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
-                0x00000b2a                _exit
-                0x00000b2a                exit
+ .fini9         0x00000bbc        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+                0x00000bbc                _exit
+                0x00000bbc                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -768,11 +769,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000b2a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x00000bbc        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x00000b2e                _etext = .
+                0x00000bc0                _etext = .
 
-.data           0x00800100       0x28 load address 0x00000b2e
+.data           0x00800100       0x28 load address 0x00000bc0
                 0x00800100                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -801,8 +802,8 @@ END GROUP
                 0x00800128                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.dt        0x00800128        0x4 main.o
-                0x00800128                dt
+ .bss.dt_us     0x00800128        0x4 main.o
+                0x00800128                dt_us
  .bss._ZL12ambientColor
                 0x0080012c        0x6 rgbUtil.o
  .bss.Serial    0x00800132       0x9d C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
@@ -830,8 +831,8 @@ END GROUP
                 0x008001f4                tlc_needXLAT
  *(COMMON)
                 0x008001f5                PROVIDE (__bss_end, .)
-                0x00000b2e                __data_load_start = LOADADDR (.data)
-                0x00000b56                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000bc0                __data_load_start = LOADADDR (.data)
+                0x00000be8                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x008001f5        0x0
                 0x008001f5                PROVIDE (__noinit_start, .)
@@ -931,16 +932,16 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x6b20
+.debug_info     0x00000000     0x6b37
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x4ec main.o
- .debug_info    0x000004ec      0x4be rgbUtil.o
- .debug_info    0x000009aa       0xad tmr_int_util.o
- .debug_info    0x00000a57     0x1733 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
- .debug_info    0x0000218a     0x26f2 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
- .debug_info    0x0000487c      0x2bd C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
- .debug_info    0x00004b39      0x4e0 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
- .debug_info    0x00005019     0x1b07 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_info    0x00000000      0x503 main.o
+ .debug_info    0x00000503      0x4be rgbUtil.o
+ .debug_info    0x000009c1       0xad tmr_int_util.o
+ .debug_info    0x00000a6e     0x1733 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_info    0x000021a1     0x26f2 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .debug_info    0x00004893      0x2bd C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_info    0x00004b50      0x4e0 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+ .debug_info    0x00005030     0x1b07 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
 
 .debug_abbrev   0x00000000     0x1462
  *(.debug_abbrev)
@@ -953,56 +954,56 @@ END GROUP
  .debug_abbrev  0x00000da2      0x2af C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
  .debug_abbrev  0x00001051      0x411 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
 
-.debug_line     0x00000000     0x1135
+.debug_line     0x00000000     0x1142
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000      0x256 main.o
- .debug_line    0x00000256      0x22a rgbUtil.o
- .debug_line    0x00000480       0x70 tmr_int_util.o
- .debug_line    0x000004f0      0x20d C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
- .debug_line    0x000006fd      0x3f2 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
- .debug_line    0x00000aef      0x18e C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
- .debug_line    0x00000c7d      0x1f3 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
- .debug_line    0x00000e70      0x2c5 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_line    0x00000000      0x262 main.o
+ .debug_line    0x00000262      0x22a rgbUtil.o
+ .debug_line    0x0000048c       0x71 tmr_int_util.o
+ .debug_line    0x000004fd      0x20d C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_line    0x0000070a      0x3f2 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .debug_line    0x00000afc      0x18e C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_line    0x00000c8a      0x1f3 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+ .debug_line    0x00000e7d      0x2c5 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
 
-.debug_frame    0x00000000      0x88c
+.debug_frame    0x00000000      0x89c
  *(.debug_frame)
- .debug_frame   0x00000000       0xa8 main.o
- .debug_frame   0x000000a8       0x6c rgbUtil.o
- .debug_frame   0x00000114       0x44 tmr_int_util.o
- .debug_frame   0x00000158       0xc0 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
- .debug_frame   0x00000218      0x39c C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
- .debug_frame   0x000005b4       0xbc C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
- .debug_frame   0x00000670      0x118 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
- .debug_frame   0x00000788      0x104 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_frame   0x00000000       0xb8 main.o
+ .debug_frame   0x000000b8       0x6c rgbUtil.o
+ .debug_frame   0x00000124       0x44 tmr_int_util.o
+ .debug_frame   0x00000168       0xc0 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_frame   0x00000228      0x39c C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .debug_frame   0x000005c4       0xbc C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_frame   0x00000680      0x118 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+ .debug_frame   0x00000798      0x104 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
 
-.debug_str      0x00000000     0x1a83
+.debug_str      0x00000000     0x1a89
  *(.debug_str)
- .debug_str     0x00000000      0x39c main.o
-                                0x3df (size before relaxing)
- .debug_str     0x0000039c       0x87 rgbUtil.o
+ .debug_str     0x00000000      0x3ba main.o
+                                0x3fd (size before relaxing)
+ .debug_str     0x000003ba       0x87 rgbUtil.o
                                 0x3b9 (size before relaxing)
- .debug_str     0x00000423       0x2e tmr_int_util.o
+ .debug_str     0x00000441       0x16 tmr_int_util.o
                                 0x231 (size before relaxing)
- .debug_str     0x00000451      0xd9f C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_str     0x00000457      0xd9f C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
                                 0xff2 (size before relaxing)
- .debug_str     0x000011f0      0x3a3 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .debug_str     0x000011f6      0x3a3 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
                                 0xe98 (size before relaxing)
- .debug_str     0x00001593      0x148 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_str     0x00001599      0x148 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
                                 0x24a (size before relaxing)
- .debug_str     0x000016db      0x102 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+ .debug_str     0x000016e1      0x102 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
                                 0x382 (size before relaxing)
- .debug_str     0x000017dd      0x2a6 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_str     0x000017e3      0x2a6 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
                                0x11f8 (size before relaxing)
 
-.debug_loc      0x00000000     0x2d08
+.debug_loc      0x00000000     0x2d3c
  *(.debug_loc)
- .debug_loc     0x00000000      0x138 main.o
- .debug_loc     0x00000138      0x114 rgbUtil.o
- .debug_loc     0x0000024c      0x161 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
- .debug_loc     0x000003ad     0x1eba C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
- .debug_loc     0x00002267      0x249 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
- .debug_loc     0x000024b0      0x3fe C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
- .debug_loc     0x000028ae      0x45a C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
+ .debug_loc     0x00000000      0x16c main.o
+ .debug_loc     0x0000016c      0x114 rgbUtil.o
+ .debug_loc     0x00000280      0x161 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial0.o)
+ .debug_loc     0x000003e1     0x1eba C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(Print.o)
+ .debug_loc     0x0000229b      0x249 C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(wiring.o)
+ .debug_loc     0x000024e4      0x3fe C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(SparkFun_Tlc5940.o)
+ .debug_loc     0x000028e2      0x45a C:\Users\mytch\Desktop\CPE329~3\CPE329~1\CPE329~1\ARDUIN~1\Debug\libArduinoCore.a(HardwareSerial.o)
 
 .debug_macinfo
  *(.debug_macinfo)

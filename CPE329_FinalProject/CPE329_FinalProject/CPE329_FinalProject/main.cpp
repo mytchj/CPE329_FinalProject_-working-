@@ -4,7 +4,7 @@
 
 int GS = TOP_GS; //0   // LED greyscale
 int chan = 0; // LED channel
-uint32_t dt = 0;
+uint32_t dt_us = 0;
 
 int main(void){
 	_delay_ms(100);			// startup delay
@@ -15,8 +15,8 @@ int main(void){
 	
 	initGPIO();
 	initTimers();
-	//initPCINT();
-	//sei();
+	initPCINT();
+	sei();
    
 	// Turn on full, then fade off
 	while(GS >= 0){
@@ -42,25 +42,47 @@ int main(void){
 	return 0;
 }
 
+////////////////////////////////ISR////////////////////////////////////////////
 
+// ISR that holds the time between halleffect readings
+// timer0 set to overflow every 100us / 0.1ms
 ISR(TIMER0_COMPA_vect){
-	dt = dt + 100;
+	dt_us = dt_us + 100;
+	
+	// if dt_us > 1 second bike is probalby stopped 
+	if(dt_us > 1000000){
+		// tell rgbUtil that bike is stopped
+		
+		dt_us = 0;		// reset dt_us
+	}
 }
 
 // ISR for halleffect1 at pin D8
 // enters ISR when set from high (from pull-up) to low
 ISR(PCINT0_vect){
+	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
+	// send dt_us to rgbUtil
+	
+	dt_us = 0;		// reset dt_us
 }
 
 // ISR for halleffect1 at pin D7
 // enters ISR when set from high (from pull-up) to low
 ISR(PCINT1_vect){
+	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
+	// send dt_us to rgbUtil
+	
+	dt_us = 0;		// reset dt_us
 }
 
 // ISR for halleffect1 at pin A0
 // enters ISR when set from high (from pull-up) to low
 ISR(PCINT2_vect){
+	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
+	// send dt_us to rgbUtil
+	
+	dt_us = 0;		// reset dt_us
 }
