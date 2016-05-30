@@ -20,6 +20,8 @@ typedef struct color{
    uint16_t b;
 } color;
 
+void nextLED(uint32_t speed);
+
 /* Cycles to the next LED in the progression */
 void nextLED();
 

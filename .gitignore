@@ -46,3 +46,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 *.atsuo
+*.elf
+*.hex
+*.map
+CPE329_FinalProject/CPE329_FinalProject/CPE329_FinalProject/Debug/CPE329_FinalProject.lss
+*.srec
+CPE329_FinalProject/CPE329_FinalProject/CPE329_FinalProject/Debug/main.o

@@ -7,7 +7,7 @@ int chan = 0; // LED channel
 uint32_t dt_us = 0;
 
 int main(void){
-   uint32_t speed = 0;
+   uint32_t speed = 2200;
    uint8_t increment = 256;
    
 	_delay_ms(100);			// startup delay
@@ -40,7 +40,7 @@ int main(void){
       /* Testing speed change */
       if (speed > 2305 || speed < 256)
          increment *= -1;
-      speed += increment;
+      speed -= increment;
       
       /* Test Ambient Colors with fade */
 //		setAmbientColor(GS, 0, 0);

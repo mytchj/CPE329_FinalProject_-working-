@@ -25,11 +25,11 @@ uint8_t currentLED = -1;
 
 uint32_t lastDeltaT = 0;
 
-uint8_t brightnesslevel = 15;
+uint8_t brightnesslevel = 0;
 uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 16, 2 * TOP_GS / 16,
    3 * TOP_GS / 16, 4 *  TOP_GS / 16, 5 * TOP_GS / 16, 6 * TOP_GS / 16,
    7 * TOP_GS / 16, 8 * TOP_GS / 16, 9 * TOP_GS / 16, 10 * TOP_GS / 16,
-   11 * TOP_GS / 16, 12 * TOP_GS / 16, 13 * TOP_GS / 16, 14 * TOP_GS / 16, TOP_GS}
+   11 * TOP_GS / 16, 12 * TOP_GS / 16, 13 * TOP_GS / 16, 14 * TOP_GS / 16, TOP_GS};
 
 static uint8_t numColorChannels = R_ENABLE + G_ENABLE + B_ENABLE;
 static uint8_t numLeds = NUM_LED_CHANNELS / numColorChannels;
@@ -40,6 +40,7 @@ color rearLight = {TOP_GS, 0, 0};
 
 void setLED(int ledNum, color color);
 void setAllLEDs(color solid);
+void setBrakeBrightness(int deltaT);
 
 void setAllLEDs(int r, int g, int b) {
    color solid = {r, g, b};
@@ -111,18 +112,18 @@ void stopped() {
       if (ndx == currentLED)
          setLED(ndx, rearLight);
       else
-         setLED(ndx, ambientColor.);
+         setLED(ndx, ambientColor);
    }
-   
+  
    Tlc.update();
 }
 
 void setBrakeBrightness(int deltaT) {
-   static uint_8 faster = 0; // To avoid lots of minute adjustments
+   static uint8_t faster = 0; // To avoid lots of minute adjustments
    static uint8_t slower = 0;
    
    if (deltaT < lastDeltaT) {
-      slower++:
+	   slower++;
       faster = 0;
    }
    else {
