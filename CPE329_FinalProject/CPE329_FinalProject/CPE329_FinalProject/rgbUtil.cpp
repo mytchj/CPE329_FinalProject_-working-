@@ -36,13 +36,22 @@ void setAmbientColor(int r, int g, int b) {
 }
 
 void nextLED() {
+   int ndx;
+   
    if (currentLED < 0)
       currentLED = bottomLED; // Definitely subject to change, just a placeholder
    
    Serial.println(TOP_GS);
    Tlc.clear();
-   Tlc.setAll(ambientColor);
-   Tlc.set(currentLED, TOP_GS);
+//   Tlc.setAll(ambientColor);
+   
+   for (ndx = 0; ndx < NUM_LED_CHANNELS; ndx++) {
+      if (ndx == currentLED)
+         Tlc.set(ndx, TOP_GS);
+      else
+         Tlc.set(ndx, ambientColor.r);
+   }
+   
    Tlc.update();
    
    currentLED += DIRECTION * NUM_COLOR_CHANNELS;
