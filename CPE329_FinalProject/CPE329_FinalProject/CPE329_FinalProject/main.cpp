@@ -38,12 +38,9 @@ int main(void){
 	while (1) {
 		nextLED(speed);
       
-      /* Testing speed change */
-      //if (speed > 10000 || speed < 256)
+      /* Testing slowing down */
       if(speed > 0)
 	    speed--;
-		// increment *= -1;
-      //speed += increment;
       
       /* Test Ambient Colors with fade */
 //		setAmbientColor(GS, 0, 0);
