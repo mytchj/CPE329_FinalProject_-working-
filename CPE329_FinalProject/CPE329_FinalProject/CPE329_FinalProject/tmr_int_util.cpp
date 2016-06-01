@@ -14,6 +14,10 @@ void initGPIO(){
 	DDRD &= ~(1<<HALLEFFECT2);
 	DDRC &= ~(1<<HALLEFFECT3);
 	
+	// Debug LED is an output
+	PORTD |= (1<<DEBUGLED);
+	PORTD &= ~(1<<DEBUGLED);		// initially off
+	
 	// turn on internal pull-up for hall effects
 	PORTB |= (1<<HALLEFFECT1);
 	PORTD |= (1<<HALLEFFECT2);
@@ -32,7 +36,7 @@ void initTimers(){
 	TIFR0 = 0x02;		// set overflow to OCR0A value
 }
 
-// sets up all three PCINT vectors for each halleffect sensor
+// sets up all three PCINT vectors for each hall effect sensor
 void initPCINT(){
 	cli();		// clear interrupts
 	
@@ -40,17 +44,15 @@ void initPCINT(){
 	PCICR = 0b00000111;
 	
 	// PCINT0 -> D8 (halleffect sensor 1)
-	PCMSK0 = (1<<PCINT0);
-	
-	// PCINT1 -> D7 (halleffect sensor 2)
-	PCMSK1 = (1<<PCINT23);
-	
-	// PCINT2 -> A0 (halleffect sensor 3)
-	PCMSK2 = (1<<PCINT8);
+	PCMSK0 = (1<<HALLEFFECT1);
+	// PCINT1 -> A0 (halleffect sensor 3)
+	PCMSK1 = (1<<HALLEFFECT3);
+	// PCINT2 -> D7 (halleffect sensor 2)
+	PCMSK2 = (1<<HALLEFFECT2);
 	
 	// set the PCINT flag register for all 3 PCINTs
 	PCIFR = 0b00000111;
 	
-	sei();
+	sei();		// set interrupts 
 }
 

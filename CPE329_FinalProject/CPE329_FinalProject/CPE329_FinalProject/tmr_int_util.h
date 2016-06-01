@@ -13,6 +13,7 @@
 #define HALLEFFECT1 PB0		// digital pin D8
 #define HALLEFFECT2 PD7		// digital pin D7
 #define HALLEFFECT3 PC0		// analog pin A0
+#define DEBUGLED PD2		// digital pin D2
 
 // constants 
 #define TOP_GS 1250
