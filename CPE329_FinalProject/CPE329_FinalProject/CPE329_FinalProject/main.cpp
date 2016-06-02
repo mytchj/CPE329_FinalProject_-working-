@@ -7,12 +7,7 @@ uint32_t dt_us = 0;			// time between sensor readings
 uint8_t foobar = 0;
 
 int main(void){
-   uint32_t speed = 999999;
-   uint32_t increment = 256;
-   
-   
-   
-	_delay_ms(100);			// startup delay
+   _delay_ms(100);			// startup delay
 	
 	init();					// initializations for Arduino.h
 	Tlc.init();				// initialize the TLC chip
@@ -30,13 +25,9 @@ int main(void){
    
 	//Infinitely cycle an LED around the loop
 	while (1) {
-      
-	  /*
-      // Testing slowing down
-      if(speed > 0)
-	    speed--;
-		_delay_ms(500);
-		*/
+      if (dt_us > 1000000) {
+         <#statements#>
+      }
 	}
 	return 0;
 }
