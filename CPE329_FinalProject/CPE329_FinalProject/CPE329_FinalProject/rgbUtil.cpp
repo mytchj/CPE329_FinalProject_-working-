@@ -85,15 +85,17 @@ void nextLED(uint8_t sensorNum, uint32_t deltaT) {
 
 void nextLED(uint8_t sensorNum) {
    int ndx;
-   static uint8_t prevSensorNum = -1;
+//   static uint8_t prevSensorNum = -1;
    
-   if (nextSensor(sensorNum, prevSensorNum))
-      if ((++currentLED) >= numLeds)
-         currentLED = 0;
-   else if (prevSensor(sensorNum, prevSensorNum))
-      if ((--currentLED) < 0)
-         currentLED = numLeds - 1;
-   prevSensorNum = sensorNum;
+//   if (nextSensor(sensorNum, prevSensorNum))
+//      if ((++currentLED) >= numLeds)
+//         currentLED = 0;
+//   else if (prevSensor(sensorNum, prevSensorNum))
+//      if ((--currentLED) < 0)
+//         currentLED = numLeds - 1;
+//   prevSensorNum = sensorNum;
+   
+   currentLED = sensorNum;
    
    if (currentLED < 0)
       currentLED = bottomLED; // Definitely subject to change, just a placeholder
