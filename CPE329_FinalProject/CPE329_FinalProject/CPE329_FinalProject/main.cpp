@@ -26,21 +26,23 @@ int main(void){
    
 	//Infinitely cycle an LED around the loop
 	while (1) {
-		nextLED(speed);
+		
+		//nextLED();
+		//Tlc.update();
       
-      /* Testing speed change */
+      // Testing speed change
       //if (speed > 10000 || speed < 256)
       if(speed > 0)
 	    speed--;
 		// increment *= -1;
       //speed += increment;
       
-      /* Test Ambient Colors with fade */
+      // Test Ambient Colors with fade
 //		setAmbientColor(GS, 0, 0);
 //		GS++;
 //		GS %= (TOP_GS/16);
       
-		_delay_ms(100);
+		_delay_ms(500);
 	}
    
 	return 0;
@@ -66,6 +68,7 @@ ISR(TIMER0_COMPA_vect){
 ISR(PCINT0_vect){
 	cli();
 	PORTD ^= (1<<DEBUGLED);		// toggle debug LED on
+	nextLED();
 	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
@@ -80,6 +83,7 @@ ISR(PCINT0_vect){
 ISR(PCINT1_vect){
 	cli();
 	PORTD ^= (1<<DEBUGLED);		// turn debug LED on
+	nextLED();
 	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
@@ -94,6 +98,7 @@ ISR(PCINT1_vect){
 ISR(PCINT2_vect){
 	cli();
 	PORTD ^= (1<<DEBUGLED);		// turn debug LED on
+	nextLED();
 	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
