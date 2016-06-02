@@ -22,7 +22,7 @@ int main(void){
 	// Temporary idea: Determine the bottom/back LED, send it to rgbUtil so that
 	//  it knows which led to cycle to next
 	setBottomLED(0);
-	setAmbientColor(0, 0, TOP_GS/15);
+	setAmbientColor(TOP_GS, TOP_GS, TOP_GS);
    
 	//Infinitely cycle an LED around the loop
 	while (1) {
@@ -65,9 +65,10 @@ ISR(TIMER0_COMPA_vect){
 ISR(PCINT0_vect){
 	cli();
 	PORTD ^= (1<<DEBUGLED);		// toggle debug LED on
-	nextLED(0);
 	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
+	
+	nextLED(0, dt_us);
 	
 	// send dt_us to rgbUtil
 	
@@ -80,9 +81,10 @@ ISR(PCINT0_vect){
 ISR(PCINT1_vect){
 	cli();
 	PORTD ^= (1<<DEBUGLED);		// turn debug LED on
-	nextLED(1);
 	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
+	
+	nextLED(1, dt_us);
 	
 	// send dt_us to rgbUtil
 	
@@ -95,9 +97,11 @@ ISR(PCINT1_vect){
 ISR(PCINT2_vect){
 	cli();
 	PORTD ^= (1<<DEBUGLED);		// turn debug LED on
-	nextLED(2);
-	
+		
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
+	
+	nextLED(2, dt_us);
+
 	
 	// send dt_us to rgbUtil
 

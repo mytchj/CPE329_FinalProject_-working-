@@ -26,10 +26,10 @@ uint8_t currentLED = -1;
 uint32_t lastDeltaT = 0;
 
 uint8_t brightnesslevel = 15;
-uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 16, 2 * TOP_GS / 16,
-   3 * TOP_GS / 16, 4 *  TOP_GS / 16, 5 * TOP_GS / 16, 6 * TOP_GS / 16,
-   7 * TOP_GS / 16, 8 * TOP_GS / 16, 9 * TOP_GS / 16, 10 * TOP_GS / 16,
-   11 * TOP_GS / 16, 12 * TOP_GS / 16, 13 * TOP_GS / 16, 14 * TOP_GS / 16, TOP_GS};
+uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 16, TOP_GS / 16,
+   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16,
+   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16,
+   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS};
 
 static uint8_t numColorChannels = R_ENABLE + G_ENABLE + B_ENABLE;
 static uint8_t numLeds = NUM_LED_CHANNELS / numColorChannels;
@@ -141,13 +141,13 @@ void setBrakeBrightness(int deltaT) {
       slower = 0;
    }
    
-   if (faster >= 10) {
+   if (faster >= 0) {	// Decreased for testing, normally 10
       faster = 0;
       if (brightnesslevel > 0)
          brightnesslevel--;
    }
    
-   if (slower >= 10) {
+   if (slower >= 0) {	// Decreased for testing, normally 10
       slower = 0;
       if (brightnesslevel < MAX_BRIGHTNESS) {
          brightnesslevel++;
