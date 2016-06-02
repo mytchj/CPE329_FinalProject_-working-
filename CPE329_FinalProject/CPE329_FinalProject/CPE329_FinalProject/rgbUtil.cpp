@@ -80,7 +80,7 @@ void nextLED(uint8_t sensorNum, uint32_t deltaT) {
    
    rearLight.r = brightnessSteps[brightnesslevel];
    
-   nextLED(uint8_t sensorNum);
+   nextLED(sensorNum);
 }
 
 void nextLED(uint8_t sensorNum) {
