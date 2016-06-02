@@ -9,7 +9,7 @@
 #include "rgbUtil.h"
 
 //#define NUM_COLOR_CHANNELS 3
-#define NUM_LED_CHANNELS 16
+#define NUM_LED_CHANNELS 9
 #define DIRECTION 1  // A macro to correct the direction of the cycle, depending on the physical setup
 #define TOP_GS 1250
 
@@ -25,7 +25,7 @@ uint8_t currentLED = -1;
 
 uint32_t lastDeltaT = 0;
 
-uint8_t brightnesslevel = 0;
+uint8_t brightnesslevel = 15;
 uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 16, 2 * TOP_GS / 16,
    3 * TOP_GS / 16, 4 *  TOP_GS / 16, 5 * TOP_GS / 16, 6 * TOP_GS / 16,
    7 * TOP_GS / 16, 8 * TOP_GS / 16, 9 * TOP_GS / 16, 10 * TOP_GS / 16,
