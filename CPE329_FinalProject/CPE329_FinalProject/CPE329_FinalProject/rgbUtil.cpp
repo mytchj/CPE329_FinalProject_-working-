@@ -15,6 +15,7 @@
 
 #define BRIGHTNESS_LEVELS 16
 #define MAX_BRIGHTNESS 15
+#define NUM_SAMPS 5
 
 #define R_ENABLE 1
 #define G_ENABLE 1
@@ -25,11 +26,11 @@ uint8_t currentLED = -1;
 
 uint32_t lastDeltaT = 0;
 
-uint8_t brightnesslevel = 15;
-uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 16, TOP_GS / 16,
-   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16,
-   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16,
-   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS};
+uint8_t brightnesslevel = MAX_BRIGHTNESS;
+uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 15, TOP_GS / 14,
+   TOP_GS / 13, TOP_GS / 12, TOP_GS / 11, TOP_GS / 10,
+   TOP_GS / 9, TOP_GS / 8, TOP_GS / 7, TOP_GS / 6,
+   TOP_GS / 5, TOP_GS / 4, TOP_GS / 3, TOP_GS / 2, TOP_GS};
 
 static uint8_t numColorChannels = R_ENABLE + G_ENABLE + B_ENABLE;
 static uint8_t numLeds = NUM_LED_CHANNELS / numColorChannels;
@@ -52,11 +53,10 @@ void setAllLEDs(int r, int g, int b) {
 }
 
 void setAllLEDs(color solid) {
-   int ndx;
-   Serial.println(solid.r);   // print GS data to Serial window (BAUD =9600)
-   Tlc.clear();      // clear TLC data
-   //   Tlc.setAll(r);     // set all TLC channel (15:0) to GS value
-   
+   int ndx;			// index
+   Tlc.clear();		// clear TLC data
+ 
+   // set every LED the same color
    for (ndx = 0; ndx < numLeds; ndx++)
       setLED(ndx, solid);
    
@@ -98,7 +98,6 @@ void nextLED(uint8_t sensorNum) {
    if (currentLED < 0)
       currentLED = bottomLED; // Definitely subject to change, just a placeholder
    
-   Serial.println(TOP_GS);
    Tlc.clear();
    
    for (ndx = 0; ndx < numLeds; ndx++) {
@@ -129,11 +128,23 @@ void stopped() {
 }
 
 void setBrakeBrightness(int deltaT) {
+   
+   /*
+   // slower
+   if(deltaT > lastDeltaT){
+	   brightnesslevel = MAX_BRIGHTNESS;
+   }
+   // faster
+   else{
+		brightnesslevel = 0;
+   }
+   */
+   
    static uint8_t faster = 0; // To avoid lots of minute adjustments
    static uint8_t slower = 0;
    
-   if (deltaT < lastDeltaT) {
-	   slower++;
+   if (lastDeltaT < deltaT) {
+	  slower++;
       faster = 0;
    }
    else {
@@ -141,13 +152,13 @@ void setBrakeBrightness(int deltaT) {
       slower = 0;
    }
    
-   if (faster >= 0) {	// Decreased for testing, normally 10
+   if (faster >= NUM_SAMPS) {	// Decreased for testing, normally 10
       faster = 0;
       if (brightnesslevel > 0)
          brightnesslevel--;
    }
    
-   if (slower >= 0) {	// Decreased for testing, normally 10
+   if (slower >= NUM_SAMPS) {	// Decreased for testing, normally 10
       slower = 0;
       if (brightnesslevel < MAX_BRIGHTNESS) {
          brightnesslevel++;

@@ -16,9 +16,9 @@
 #define DEBUGLED PD4		// digital pin D2
 
 // constants 
-#define TOP_GS 1250
-#define GS_DELAY 5
-#define OCR0A_OVR 200
+#define TOP_GS 1250			// highest noticeable GS value
+#define OCR0A_OVR 200		// timer0 overflow value
+#define STOP_TIME 100000	// 1 second in us
 
 // standard libraries 
 #include <avr/io.h>

@@ -2,13 +2,15 @@
 #include "rgbUtil.h"
 #include "tmr_int_util.h"
 
-int GS = TOP_GS; //0   // LED greyscale
-int chan = 0; // LED channel
-uint32_t dt_us = 0;
+uint32_t dt_us = 0;			// time between sensor readings
+
+uint8_t foobar = 0;
 
 int main(void){
    uint32_t speed = 999999;
    uint32_t increment = 256;
+   
+   
    
 	_delay_ms(100);			// startup delay
 	
@@ -23,25 +25,24 @@ int main(void){
 	//  it knows which led to cycle to next
 	setBottomLED(0);
 	setAmbientColor(TOP_GS, TOP_GS, TOP_GS);
+	
+	Serial.begin(9600);
    
 	//Infinitely cycle an LED around the loop
 	while (1) {
-		
-		//nextLED();
-		//Tlc.update();
+		// if dt_us > 3 second bike is probalby stopped
+		if(dt_us > STOP_TIME){
+			// tell rgbUtil that bike is stopped
+			setAllLEDs(0xFFF, 0, 0);
+		}
       
-      /* Testing slowing down  */
+	  /*
+      // Testing slowing down
       if(speed > 0)
 	    speed--;
-      
-      // Test Ambient Colors with fade
-//		setAmbientColor(GS, 0, 0);
-//		GS++;
-//		GS %= (TOP_GS/16);
-      
 		_delay_ms(500);
+		*/
 	}
-   
 	return 0;
 }
 
@@ -52,59 +53,62 @@ int main(void){
 ISR(TIMER0_COMPA_vect){
 	dt_us = dt_us + 100;
 	
-	// if dt_us > 1 second bike is probalby stopped 
-	if(dt_us > 1000000){
-		// tell rgbUtil that bike is stopped
-		
-		dt_us = 0;		// reset dt_us
-	}
+	PORTD ^= (1<<DEBUGLED);
 }
 
 // ISR for halleffect1 at pin D8
 // enters ISR when set from high (from pull-up) to low
 ISR(PCINT0_vect){
-	cli();
-	PORTD ^= (1<<DEBUGLED);		// toggle debug LED on
+	if(foobar){
+		//cli();						// disable interrupts
+		dt_us = dt_us + TCNT0;	// add remaining TCNT time to dt_us
+		nextLED(0, dt_us);			// send dt_us to rgbUtil
 	
-	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
+		Serial.println("time reading in ms is:");
+		Serial.println((dt_us));
 	
-	nextLED(0, dt_us);
-	
-	// send dt_us to rgbUtil
-	
-	dt_us = 0;		// reset dt_us
-	sei();
+		dt_us = 0;					// reset dt_us
+		foobar = 0;
+		//sei();						// enable interrupts
+	}
+	else foobar = 1;
 }
 
 // ISR for halleffect1 at pin D7
 // enters ISR when set from high (from pull-up) to low
 ISR(PCINT1_vect){
-	cli();
-	PORTD ^= (1<<DEBUGLED);		// turn debug LED on
+	if(foobar){
+		//cli();						// disable interrupts 
+		dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us	
+		nextLED(1, dt_us);			// send dt_us to rgbUtil	
 	
-	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
+		Serial.println("time reading in ms is:");
+		Serial.println((dt_us));
 	
-	nextLED(1, dt_us);
-	
-	// send dt_us to rgbUtil
-	
-	dt_us = 0;		// reset dt_us	
-	sei();
+		dt_us = 0;					// reset dt_us	
+		foobar = 0;
+		//sei();						// enable interrupts 
+	}
+	else
+		foobar = 1;
 }
 
 // ISR for halleffect1 at pin A0
 // enters ISR when set from high (from pull-up) to low
 ISR(PCINT2_vect){
-	cli();
-	PORTD ^= (1<<DEBUGLED);		// turn debug LED on
-		
-	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
+	//cli();	
+	if(foobar){					// disable interrupts
+		PORTD ^= (1<<DEBUGLED);		// turn debug LED on
+		dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
+		nextLED(2, dt_us);			// send dt_us to rgbUtil
 	
-	nextLED(2, dt_us);
-
+		Serial.println("time reading in ms is:");
+		Serial.println((dt_us));
 	
-	// send dt_us to rgbUtil
-
-	dt_us = 0;		// reset dt_us
-	sei();
+		dt_us = 0;					// reset dt_us
+		foobar = 0;
+	}
+	else
+		foobar = 1;
+	//sei();						// enable interrupts 
 }
