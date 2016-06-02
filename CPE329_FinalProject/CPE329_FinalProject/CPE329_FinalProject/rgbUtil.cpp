@@ -172,7 +172,7 @@ void setLED(int ledNum, color color) {
 int nextSensor(uint8_t sensorNum, uint8_t prevSensorVal) {
    int isNextSensor = 0;
    
-   if (prevSensorVal == 8)
+   if (prevSensorVal == 2)
       isNextSensor = (sensorNum == 0);
    else
       isNextSensor = (sensorNum > prevSensorVal);
@@ -183,8 +183,8 @@ int nextSensor(uint8_t sensorNum, uint8_t prevSensorVal) {
 int prevSensor(uint8_t sensorNum, uint8_t prevSensorVal) {
    int isPrevSensor = 0;
    
-   if (prevSensorVal == 8)
-      isPrevSensor = (sensorNum == 8);
+   if (prevSensorVal == 2)
+      isPrevSensor = (sensorNum == 2);
    else
       isPrevSensor = (sensorNum < prevSensorVal);
    
