@@ -38,7 +38,7 @@ int main(void){
 	while (1) {
 		nextLED(speed);
       
-      /* Testing slowing down */
+      /* Testing slowing down  */
       if(speed > 0)
 	    speed--;
       
