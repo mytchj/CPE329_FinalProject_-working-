@@ -159,8 +159,14 @@ void setLED(int ledNum, color color) {
       Tlc.set(ledNum + ++offset, color.b);
 }
 
+void blur(color *led) {
+	
+}
+
 void blur(color *led0, color *led1, color *led2) {
-   
+   blur(led0);
+   blur(led1);
+   blur(led2);
 }
 
 int nextSensor(uint8_t sensorNum, uint8_t prevSensorVal) {
