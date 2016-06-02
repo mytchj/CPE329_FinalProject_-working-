@@ -13,28 +13,18 @@ int main(void){
 	_delay_ms(100);			// startup delay
 	
 	init();					// initializations for Arduino.h
-	//Serial.begin(9600);		// set baud rate for serial com
 	Tlc.init();				// initialize the TLC chip
-	
-	initGPIO();
-	initTimers();
-	initPCINT();
-	sei();
-   
-	//// Turn on full, then fade off
-	//while(GS >= 0){
-		//setAllLEDs(GS,0,0);
-		//GS--;					// increment GS
-      //
-		//_delay_ms(GS_DELAY);	// delay GS color
-	//}
+	initGPIO();				// initialize GPIO and pull-ups
+	_delay_ms(100);			// GPIO stability delay
+	initTimers();			// initialize timer0 (CTC, T~100us)
+	initPCINT();			// initialize pin change interrupts (2:0)
    
 	// Temporary idea: Determine the bottom/back LED, send it to rgbUtil so that
 	//  it knows which led to cycle to next
 	setBottomLED(0);
 	setAmbientColor(0, 0, TOP_GS/15);
    
-	//Infintely cycle an LED around the loop
+	//Infinitely cycle an LED around the loop
 	while (1) {
 		nextLED(speed);
       
@@ -55,7 +45,7 @@ int main(void){
 
 ////////////////////////////////ISR////////////////////////////////////////////
 
-// ISR that holds the time between halleffect readings
+// ISR that holds the time between hall effect readings
 // timer0 set to overflow every 100us / 0.1ms
 ISR(TIMER0_COMPA_vect){
 	dt_us = dt_us + 100;
@@ -71,29 +61,41 @@ ISR(TIMER0_COMPA_vect){
 // ISR for halleffect1 at pin D8
 // enters ISR when set from high (from pull-up) to low
 ISR(PCINT0_vect){
+	cli();
+	PORTD ^= (1<<DEBUGLED);		// toggle debug LED on
+	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
 	// send dt_us to rgbUtil
 	
 	dt_us = 0;		// reset dt_us
+	sei();
 }
 
 // ISR for halleffect1 at pin D7
 // enters ISR when set from high (from pull-up) to low
 ISR(PCINT1_vect){
+	cli();
+	PORTD ^= (1<<DEBUGLED);		// turn debug LED on
+	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
 	// send dt_us to rgbUtil
 	
-	dt_us = 0;		// reset dt_us
+	dt_us = 0;		// reset dt_us	
+	sei();
 }
 
 // ISR for halleffect1 at pin A0
 // enters ISR when set from high (from pull-up) to low
 ISR(PCINT2_vect){
+	cli();
+	PORTD ^= (1<<DEBUGLED);		// turn debug LED on
+	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
 	// send dt_us to rgbUtil
-	
+
 	dt_us = 0;		// reset dt_us
+	sei();
 }
