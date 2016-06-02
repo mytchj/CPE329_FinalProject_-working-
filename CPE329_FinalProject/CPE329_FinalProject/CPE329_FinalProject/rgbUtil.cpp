@@ -27,10 +27,10 @@ uint8_t currentLED = -1;
 uint32_t lastDeltaT = 0;
 
 uint8_t brightnesslevel = MAX_BRIGHTNESS;
-uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 15, TOP_GS / 14,
-   TOP_GS / 13, TOP_GS / 12, TOP_GS / 11, TOP_GS / 10,
-   TOP_GS / 9, TOP_GS / 8, TOP_GS / 7, TOP_GS / 6,
-   TOP_GS / 5, TOP_GS / 4, TOP_GS / 3, TOP_GS / 2, TOP_GS};
+uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 16, TOP_GS / 16,
+   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16,
+   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16,
+   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS};
 
 static uint8_t numColorChannels = R_ENABLE + G_ENABLE + B_ENABLE;
 static uint8_t numLeds = NUM_LED_CHANNELS / numColorChannels;
@@ -41,7 +41,7 @@ color rearLight = {TOP_GS, 0, 0};
 
 void setLED(int ledNum, color color);
 void setAllLEDs(color solid);
-void setBrakeBrightness(int deltaT);
+void setBrakeBrightness(uint32_t deltaT);
 
 int nextSensor(uint8_t sensorNum, uint8_t prevSensorVal);
 int prevSensor(uint8_t sensorNum, uint8_t prevSensorVal);
@@ -95,8 +95,8 @@ void nextLED(uint8_t sensorNum) {
 //         currentLED = numLeds - 1;
 //   prevSensorNum = sensorNum;
    
-   if((currentLED = --sensorNum) < 0)
-      currentLED = 3;
+   if((currentLED = sensorNum) < 0)
+      currentLED = 2;
    
    
    if (currentLED < 0)
@@ -131,7 +131,7 @@ void stopped() {
    Tlc.update();
 }
 
-void setBrakeBrightness(int deltaT) {
+void setBrakeBrightness(uint32_t deltaT) {
    
    /*
    // slower
@@ -149,12 +149,17 @@ void setBrakeBrightness(int deltaT) {
    
    if (lastDeltaT < deltaT) {
 	  slower++;
+	  ambientColor.b += TOP_GS/6;
       faster = 0;
+      ambientColor.g =0;
    }
    else {
       faster++;
+      ambientColor.g += TOP_GS/6;
       slower = 0;
+      ambientColor.b =0;
    }
+   Tlc.update();
    
    if (faster >= NUM_SAMPS) {	// Decreased for testing, normally 10
       faster = 0;

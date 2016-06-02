@@ -24,17 +24,12 @@ int main(void){
 	// Temporary idea: Determine the bottom/back LED, send it to rgbUtil so that
 	//  it knows which led to cycle to next
 	setBottomLED(0);
-	setAmbientColor(TOP_GS, TOP_GS, TOP_GS);
+	setAmbientColor(0, 0, 0 );
 	
 	Serial.begin(9600);
    
 	//Infinitely cycle an LED around the loop
 	while (1) {
-		// if dt_us > 3 second bike is probalby stopped
-		if(dt_us > STOP_TIME){
-			// tell rgbUtil that bike is stopped
-			setAllLEDs(0xFFF, 0, 0);
-		}
       
 	  /*
       // Testing slowing down
@@ -45,6 +40,13 @@ int main(void){
 	}
 	return 0;
 }
+
+//uint32_t timeDelta(uint32_t curr, uint32_t past) {
+	//if (curr > past)
+		//return (curr - past);
+	//else
+		//return ()
+//}
 
 ////////////////////////////////ISR////////////////////////////////////////////
 
