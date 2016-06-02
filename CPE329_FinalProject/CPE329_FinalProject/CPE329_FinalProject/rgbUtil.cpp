@@ -27,10 +27,10 @@ uint8_t currentLED = -1;
 uint32_t lastDeltaT = 0;
 
 uint8_t brightnesslevel = MAX_BRIGHTNESS;
-uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, TOP_GS / 16, TOP_GS / 16,
-   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16,
-   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16,
-   TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS / 16, TOP_GS};
+uint16_t brightnessSteps[BRIGHTNESS_LEVELS] = {0, 3 * TOP_GS / 16, 3 * TOP_GS / 16,
+   3 * TOP_GS / 16, 3 * TOP_GS / 16, 3 * TOP_GS / 16, 4 * TOP_GS / 16,
+   5 * TOP_GS / 16, 6 * TOP_GS / 16, 7 * TOP_GS / 16, 8 * TOP_GS / 16,
+   10 * TOP_GS / 16, 13 * TOP_GS / 16, TOP_GS, TOP_GS, TOP_GS};
 
 static uint8_t numColorChannels = R_ENABLE + G_ENABLE + B_ENABLE;
 static uint8_t numLeds = NUM_LED_CHANNELS / numColorChannels;
@@ -97,7 +97,10 @@ void nextLED(uint8_t sensorNum) {
    
    if((currentLED = sensorNum) < 0)
       currentLED = 2;
-   
+   if(currentLED > 2 || currentLED < 0)
+	  ambientColor.r = TOP_GS;
+   else
+	  ambientColor.r = 0;
    
    if (currentLED < 0)
       currentLED = bottomLED; // Definitely subject to change, just a placeholder
@@ -132,47 +135,27 @@ void stopped() {
 }
 
 void setBrakeBrightness(uint32_t deltaT) {
-   
-   /*
-   // slower
-   if(deltaT > lastDeltaT){
-	   brightnesslevel = MAX_BRIGHTNESS;
-   }
-   // faster
-   else{
-		brightnesslevel = 0;
-   }
-   */
-   
-   static uint8_t faster = 0; // To avoid lots of minute adjustments
-   static uint8_t slower = 0;
-   
-   if (lastDeltaT < deltaT) {
-	  slower++;
-	  ambientColor.b += TOP_GS/6;
-      faster = 0;
-      ambientColor.g =0;
+   if (deltaT < 250000) {//lastDeltaT > deltaT) {
+	  if(brightnesslevel > 0) {
+		brightnesslevel--;
+	  }
+	  if (ambientColor.b < TOP_GS)
+		ambientColor.b += TOP_GS/6;
+      if (ambientColor.g > 0)
+		ambientColor.g -= TOP_GS/4;
    }
    else {
-      faster++;
-      ambientColor.g += TOP_GS/6;
-      slower = 0;
-      ambientColor.b =0;
+      if (brightnesslevel < MAX_BRIGHTNESS) {
+	      brightnesslevel += 4;
+		  if (brightnesslevel > 16)
+			brightnesslevel = 16;
+	  }
+	  if (ambientColor.g < TOP_GS)
+		ambientColor.g += TOP_GS / 4;
+      if (ambientColor.b > 0)
+		ambientColor.b -= TOP_GS / 6;
    }
    Tlc.update();
-   
-   if (faster >= NUM_SAMPS) {	// Decreased for testing, normally 10
-      faster = 0;
-      if (brightnesslevel > 0)
-         brightnesslevel--;
-   }
-   
-   if (slower >= NUM_SAMPS) {	// Decreased for testing, normally 10
-      slower = 0;
-      if (brightnesslevel < MAX_BRIGHTNESS) {
-         brightnesslevel++;
-      }
-   }
    
    lastDeltaT = deltaT;
 }

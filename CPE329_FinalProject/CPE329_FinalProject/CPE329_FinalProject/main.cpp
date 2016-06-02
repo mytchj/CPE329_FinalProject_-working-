@@ -41,12 +41,6 @@ int main(void){
 	return 0;
 }
 
-//uint32_t timeDelta(uint32_t curr, uint32_t past) {
-	//if (curr > past)
-		//return (curr - past);
-	//else
-		//return ()
-//}
 
 ////////////////////////////////ISR////////////////////////////////////////////
 
@@ -64,7 +58,7 @@ ISR(PCINT0_vect){
 	if(foobar){
 		//cli();						// disable interrupts
 		dt_us = dt_us + TCNT0;	// add remaining TCNT time to dt_us
-		nextLED(0, dt_us);			// send dt_us to rgbUtil
+		nextLED(2, dt_us);			// send dt_us to rgbUtil
 	
 		Serial.println("time reading in ms is:");
 		Serial.println((dt_us));
@@ -82,7 +76,7 @@ ISR(PCINT1_vect){
 	if(foobar){
 		//cli();						// disable interrupts 
 		dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us	
-		nextLED(1, dt_us);			// send dt_us to rgbUtil	
+		nextLED(0, dt_us);			// send dt_us to rgbUtil	
 	
 		Serial.println("time reading in ms is:");
 		Serial.println((dt_us));
@@ -102,7 +96,7 @@ ISR(PCINT2_vect){
 	if(foobar){					// disable interrupts
 		PORTD ^= (1<<DEBUGLED);		// turn debug LED on
 		dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
-		nextLED(2, dt_us);			// send dt_us to rgbUtil
+		nextLED(1, dt_us);			// send dt_us to rgbUtil
 	
 		Serial.println("time reading in ms is:");
 		Serial.println((dt_us));
