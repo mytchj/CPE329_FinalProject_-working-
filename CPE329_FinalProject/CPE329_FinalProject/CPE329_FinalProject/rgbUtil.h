@@ -20,10 +20,10 @@ typedef struct color{
    uint16_t b;
 } color;
 
-void nextLED(uint32_t speed);
-
 /* Cycles to the next LED in the progression */
-void nextLED();
+void nextLED(uint8_t sensorNum);
+
+void nextLED(uint8_t sensorNum, uint32_t speed);
 
 /* Call this if the wheel is stopped */
 void stopped();
