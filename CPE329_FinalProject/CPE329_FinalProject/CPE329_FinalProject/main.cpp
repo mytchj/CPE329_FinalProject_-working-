@@ -65,7 +65,7 @@ ISR(TIMER0_COMPA_vect){
 ISR(PCINT0_vect){
 	cli();
 	PORTD ^= (1<<DEBUGLED);		// toggle debug LED on
-	nextLED();
+	nextLED(0);
 	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
@@ -80,7 +80,7 @@ ISR(PCINT0_vect){
 ISR(PCINT1_vect){
 	cli();
 	PORTD ^= (1<<DEBUGLED);		// turn debug LED on
-	nextLED();
+	nextLED(1);
 	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
@@ -95,7 +95,7 @@ ISR(PCINT1_vect){
 ISR(PCINT2_vect){
 	cli();
 	PORTD ^= (1<<DEBUGLED);		// turn debug LED on
-	nextLED();
+	nextLED(2);
 	
 	dt_us = dt_us + TCNT0;		// add remaining TCNT time to dt_us
 	
