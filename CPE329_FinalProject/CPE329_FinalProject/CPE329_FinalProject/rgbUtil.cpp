@@ -43,6 +43,8 @@ void setLED(int ledNum, color color);
 void setAllLEDs(color solid);
 void setBrakeBrightness(uint32_t deltaT);
 
+void blur(color *led0, color *led1, color *led2);
+
 int nextSensor(uint8_t sensorNum, uint8_t prevSensorVal);
 int prevSensor(uint8_t sensorNum, uint8_t prevSensorVal);
 
@@ -85,25 +87,9 @@ void nextLED(uint8_t sensorNum, uint32_t deltaT) {
 
 void nextLED(uint8_t sensorNum) {
    int ndx;
-//   static uint8_t prevSensorNum = -1;
-   
-//   if (nextSensor(sensorNum, prevSensorNum))
-//      if ((++currentLED) >= numLeds)
-//         currentLED = 0;
-//   else if (prevSensor(sensorNum, prevSensorNum))
-//      if ((--currentLED) < 0)
-//         currentLED = numLeds - 1;
-//   prevSensorNum = sensorNum;
    
    if((currentLED = sensorNum) < 0)
       currentLED = 2;
-   if(currentLED > 2 || currentLED < 0)
-	  ambientColor.r = TOP_GS;
-   else
-	  ambientColor.r = 0;
-   
-   if (currentLED < 0)
-      currentLED = bottomLED; // Definitely subject to change, just a placeholder
    
    Tlc.clear();
    
@@ -120,16 +106,17 @@ void nextLED(uint8_t sensorNum) {
 void stopped() {
    int ndx;
    
-   brightnesslevel = 15;
+   static color led0 = {0, 0, TOP_GS};
+   static color led1 = {0, TOP_GS, 0};
+   static color led2 = {TOP_GS, 0, 0};
+   
+   blur(&led0, &led1, &led2);
    
    Tlc.clear();
    
-   for (ndx = 0; ndx < numLeds; ndx++) {
-      if (ndx == currentLED)
-         setLED(ndx, rearLight);
-      else
-         setLED(ndx, ambientColor);
-   }
+   setLED(0, led0);
+   setLED(1, led1);
+   setLED(2, led2);
   
    Tlc.update();
 }
@@ -170,6 +157,10 @@ void setLED(int ledNum, color color) {
       Tlc.set(ledNum + ++offset, color.g);
    if (B_ENABLE)
       Tlc.set(ledNum + ++offset, color.b);
+}
+
+void blur(color *led0, color *led1, color *led2) {
+   
 }
 
 int nextSensor(uint8_t sensorNum, uint8_t prevSensorVal) {

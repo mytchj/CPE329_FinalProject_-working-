@@ -25,9 +25,8 @@ int main(void){
    
 	//Infinitely cycle an LED around the loop
 	while (1) {
-      if (dt_us > 1000000) {
-         <#statements#>
-      }
+      if (dt_us > 1000000)
+         stopped()
 	}
 	return 0;
 }
