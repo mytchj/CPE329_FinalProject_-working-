@@ -95,7 +95,8 @@ void nextLED(uint8_t sensorNum) {
 //         currentLED = numLeds - 1;
 //   prevSensorNum = sensorNum;
    
-   currentLED = sensorNum;
+   currentLED = ++sensorNum;
+   currentLED %= 3;
    
    if (currentLED < 0)
       currentLED = bottomLED; // Definitely subject to change, just a placeholder
