@@ -106,9 +106,9 @@ void nextLED(uint8_t sensorNum) {
 void stopped() {
    int ndx;
    
-   static color led0 = {0, 0, TOP_GS};
+   static color led0 = {TOP_GS, 0, 0};
    static color led1 = {0, TOP_GS, 0};
-   static color led2 = {TOP_GS, 0, 0};
+   static color led2 = {0, 0, TOP_GS};
    
    blur(&led0, &led1, &led2);
    
@@ -161,23 +161,23 @@ void setLED(int ledNum, color color) {
 
 void blur(color *led) {
    if (!led->r) {
-      if (led->b) {
-         led->b--;
-         led->g++;
+      if (led->b > 0) {
+         led->b -= 50;
+         led->g += 50;
       }
       else {
-         led->g--;
-         led->r++;
+         led->g -= 50;
+         led->r += 50;
       }
    }
    else {
-      if (!led->g) {
-         led->r++;
-         led->b--;
+      if (!led->g ) {
+         led->r -= 50;
+         led->b += 50;
       }
       else {
-         led->g--;
-         led->r++:
+         led->g -= 50;
+         led->r += 50;
       }
    }
 }
