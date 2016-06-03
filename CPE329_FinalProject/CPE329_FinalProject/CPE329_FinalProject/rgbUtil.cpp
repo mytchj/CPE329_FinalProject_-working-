@@ -160,7 +160,26 @@ void setLED(int ledNum, color color) {
 }
 
 void blur(color *led) {
-	
+   if (!led->r) {
+      if (led->b) {
+         led->b--;
+         led->g++;
+      }
+      else {
+         led->g--;
+         led->r++;
+      }
+   }
+   else {
+      if (!led->g) {
+         led->r++;
+         led->b--;
+      }
+      else {
+         led->g--;
+         led->r++:
+      }
+   }
 }
 
 void blur(color *led0, color *led1, color *led2) {
